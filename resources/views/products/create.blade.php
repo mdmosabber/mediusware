@@ -1,10 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if(session()->has('success'))
+        <p class="alert alert-success text-center text-success">
+            {{ session()->get('success') }}
+        </p>
+    @endif
+
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Create Product</h1>
     </div>
     <form action="{{ route('product.store') }}" method="post" autocomplete="off" spellcheck="false">
+        @csrf
         <section>
             <div class="row">
                 <div class="col-md-6">
@@ -22,6 +30,11 @@
                                        required
                                        placeholder="Product Name"
                                        class="form-control">
+
+                                @error('product_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                             <div class="form-group">
                                 <label for="product_sku">Product SKU</label>
@@ -30,6 +43,11 @@
                                        required
                                        placeholder="Product Name"
                                        class="form-control"></div>
+
+                            @error('product_sku')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                             <div class="form-group mb-0">
                                 <label for="product_description">Description</label>
                                 <textarea name="product_description"
@@ -37,6 +55,11 @@
                                           required
                                           rows="4"
                                           class="form-control"></textarea>
+
+                                @error('product_description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
                     </div>
@@ -87,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-lg btn-primary">Save</button>
+            <button type="submit" class="btn btn-lg btn-primary">Save</button>
             <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
         </section>
     </form>

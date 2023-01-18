@@ -92,6 +92,7 @@ function addVariantTemplate() {
                                             <a href="#" class="remove-btn" data-index="${currentIndex}" onclick="removeVariant(event, this);">Remove</a>
                                         </label>
                                         <select id="select2-value-${currentIndex}" data-index="${currentIndex}" name="product_variant[${currentIndex}][value][]" class="select2 select2-value form-control custom-select" multiple="multiple">
+
                                         </select>
                                     </div>
                                 </div>

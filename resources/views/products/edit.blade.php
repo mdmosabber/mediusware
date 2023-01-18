@@ -13,6 +13,8 @@
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Product</h6>
                         </div>
+
+
                         <div class="card-body border">
                             <div class="form-group">
                                 <label for="product_name">Product Name</label>
@@ -21,7 +23,7 @@
                                        id="product_name"
                                        required
                                        placeholder="Product Name"
-                                       class="form-control">
+                                       class="form-control" value="{{$product->title}}">
                             </div>
                             <div class="form-group">
                                 <label for="product_sku">Product SKU</label>
@@ -29,14 +31,14 @@
                                        id="product_sku"
                                        required
                                        placeholder="Product Name"
-                                       class="form-control"></div>
+                                       class="form-control" value="{{$product->sku}}"></div>
                             <div class="form-group mb-0">
                                 <label for="product_description">Description</label>
                                 <textarea name="product_description"
                                           id="product_description"
                                           required
                                           rows="4"
-                                          class="form-control"></textarea>
+                                          class="form-control">{{$product->description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -54,8 +56,8 @@
                 <!--                Variants-->
                 <div class="col-md-6">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3"><h6
-                                class="m-0 font-weight-bold text-primary">Variants</h6>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Variants</h6>
                         </div>
                         <div class="card-body pb-0" id="variant-sections">
                         </div>
@@ -73,13 +75,35 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                    <tr class="text-center">
-                                        <th width="33%">Variant</th>
-                                        <th>Price</th>
-                                        <th>Stock</th>
-                                    </tr>
+                                        <tr class="text-center">
+                                            <th width="33%">Variant</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                        </tr>
                                     </thead>
                                     <tbody id="variant-previews">
+
+
+                                    @foreach($product->product_variant_price as $variant)
+                                        @if($variant->product_variant_one == 1)
+
+                                            @foreach($product->variant as $color)
+                                                @if($color->variant_id == 1 )
+
+                                                    <tr>
+                                                       <td>{{ $color->variant }} </td>
+                                                        <td>{{ $variant->price }}</td>
+                                                        <td>{{ $variant->stock }}</td>
+                                                    </tr>
+
+                                                @endif
+
+                                            @endforeach
+
+                                        @endif
+                                    @endforeach
+
+
                                     </tbody>
                                 </table>
                             </div>
